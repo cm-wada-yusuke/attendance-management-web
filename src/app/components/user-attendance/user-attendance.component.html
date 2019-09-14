@@ -11,7 +11,7 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button
-        type="button" .1
+        type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
@@ -33,24 +33,23 @@
               <mat-form-field fxFlexFill appearance="standard">
                 <input matInput placeholder="yamada.taro" formControlName="name">
                 <mat-hint>Slackユーザー名</mat-hint>
-<!--                <button matSuffix color="basic" mat-button (click)="attendanceSearchFormGroup.valid && search()">-->
-<!--                  <mat-icon>search</mat-icon>-->
-<!--                </button>-->
               </mat-form-field>
             </div>
             <div fxFlex="30">
               <mat-form-field fxFlexFill appearance="standard">
-                <input matInput formControlName="month" [matDatepicker]="giftIssuedFrom">
+                <input matInput formControlName="month" [matDatepicker]="attendMonth">
                 <mat-hint>表示する月</mat-hint>
-                <mat-datepicker-toggle matSuffix [for]="giftIssuedFrom"></mat-datepicker-toggle>
-                <mat-datepicker #giftIssuedFrom></mat-datepicker>
+                <mat-datepicker-toggle matSuffix [for]="attendMonth"></mat-datepicker-toggle>
+                <mat-datepicker #attendMonth startView="year"
+                                [startAt]="attendanceSearchFormGroup.controls['month'].value"
+                                (monthSelected)="chosenMonthHandler($event, attendMonth)">
+                </mat-datepicker>
               </mat-form-field>
             </div>
             <div fxFlex="30">
               <button mat-raised-button color="default"
                       (click)="attendanceSearchFormGroup.valid && search()">
                 検索する
-                <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
               </button>
             </div>
           </div>
