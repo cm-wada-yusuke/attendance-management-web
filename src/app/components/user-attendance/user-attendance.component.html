@@ -54,84 +54,40 @@
             </div>
           </div>
         </form>
-        <div fxFlex class="list-fat-item-result-area">
+        <div fxFlex class="user-attendance-result-area">
+          <h3>{{summary.displayName}}さんの{{summary.month}} 合計労働時間: {{summary.totalWorkTime}}時間</h3>
           <div>
             <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
           </div>
-          <!--          <div class="mat-elevation-z8">-->
-          <!--            <table fxFlexFill mat-table [dataSource]="supplierUserResult">-->
+          <div class="mat-elevation-z8">
+            <table fxFlexFill mat-table [dataSource]="userAttendances">
 
-          <!--              <ng-container matColumnDef="userUuid">-->
-          <!--                <th mat-header-cell *matHeaderCellDef>ユーザーID</th>-->
-          <!--                <td mat-cell *matCellDef="let element"> {{element.userUuid || '-'}}</td>-->
-          <!--              </ng-container>-->
+              <ng-container matColumnDef="day">
+                <th mat-header-cell *matHeaderCellDef>日</th>
+                <td mat-cell *matCellDef="let element"
+                    [ngClass]="formatDayClass(element)"> {{formatDay(element)}}</td>
+              </ng-container>
 
-          <!--              <ng-container matColumnDef="email">-->
-          <!--                <th mat-header-cell *matHeaderCellDef>メールアドレス</th>-->
-          <!--                <td mat-cell *matCellDef="let element"> {{element.email || '-'}}</td>-->
-          <!--              </ng-container>-->
+              <ng-container matColumnDef="startAt">
+                <th mat-header-cell *matHeaderCellDef>開始</th>
+                <td mat-cell *matCellDef="let element"> {{formatStartAt(element)}} </td>
+              </ng-container>
 
-          <!--              <ng-container matColumnDef="displayUserName">-->
-          <!--                <th mat-header-cell *matHeaderCellDef>氏名</th>-->
-          <!--                <td mat-cell *matCellDef="let element"> {{element.displayUserName || '-'}}</td>-->
-          <!--              </ng-container>-->
+              <ng-container matColumnDef="endAt">
+                <th mat-header-cell *matHeaderCellDef>終了</th>
+                <td mat-cell *matCellDef="let element"> {{formatEndAt(element)}}</td>
+              </ng-container>
 
-          <!--              <ng-container matColumnDef="supplierId">-->
-          <!--                <th mat-header-cell *matHeaderCellDef>サプライヤID</th>-->
-          <!--                <td mat-cell *matCellDef="let element"> {{element.supplierId}}</td>-->
-          <!--              </ng-container>-->
-
-          <!--              <ng-container matColumnDef="company">-->
-          <!--                <th mat-header-cell *matHeaderCellDef>企業名</th>-->
-          <!--                <td mat-cell *matCellDef="let element"> {{element.company || '-'}}</td>-->
-          <!--              </ng-container>-->
+              <ng-container matColumnDef="workingTime">
+                <th mat-header-cell *matHeaderCellDef>労働時間</th>
+                <td mat-cell *matCellDef="let element"> {{formatWorkingTime(element)}}</td>
+              </ng-container>
 
 
-          <!--              <ng-container matColumnDef="createdAt">-->
-          <!--                <th mat-header-cell *matHeaderCellDef>作成日時</th>-->
-          <!--                <td mat-cell *matCellDef="let element"> {{toJst(element.createdAt) || '-'}}</td>-->
-          <!--              </ng-container>-->
-
-          <!--              <ng-container matColumnDef="updatedAt">-->
-          <!--                <th mat-header-cell *matHeaderCellDef>更新日時</th>-->
-          <!--                <td mat-cell *matCellDef="let element"> {{toJst(element.updatedAt) || '-'}}</td>-->
-          <!--              </ng-container>-->
-
-          <!--              &lt;!&ndash; Edit Column &ndash;&gt;-->
-          <!--              <ng-container matColumnDef="edit">-->
-          <!--                <th mat-header-cell *matHeaderCellDef>編集</th>-->
-          <!--                <td mat-cell *matCellDef="let element">-->
-          <!--                  <button mat-icon-button color="primary" (click)="edit(element)">-->
-          <!--                    <mat-icon color="primary">edit</mat-icon>-->
-          <!--                  </button>-->
-          <!--                </td>-->
-          <!--              </ng-container>-->
-
-          <!--              &lt;!&ndash; Delete Column &ndash;&gt;-->
-          <!--              <ng-container matColumnDef="delete">-->
-          <!--                <th mat-header-cell *matHeaderCellDef>削除</th>-->
-          <!--                <td mat-cell *matCellDef="let element">-->
-          <!--                  <button [disabled]="isManager(element)" mat-icon-button color="warn" (click)="delete(element)">-->
-          <!--                    <mat-icon [color]="isManager(element) ? 'accent' : 'warn'">delete_forever</mat-icon>-->
-          <!--                  </button>-->
-          <!--                </td>-->
-          <!--              </ng-container>-->
-
-          <!--              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
-          <!--              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
-          <!--            </table>-->
-          <!--            <mat-list role="list" *ngIf="serverError">-->
-          <!--              <mat-list-item role="listitem">-->
-          <!--                <mat-error>{{getServerErrorMessage()}}</mat-error>-->
-          <!--              </mat-list-item>-->
-          <!--            </mat-list>-->
-          <!--            <div *ngIf="lastEvaluatedUserKey" fxFlexFill fxLayoutAlign="center center">-->
-          <!--              <button fxFlexFill mat-button color="basic" (click)="getData(lastEvaluatedUserKey)">-->
-          <!--                <mat-icon>expand_more</mat-icon>-->
-          <!--                さらに読み込む-->
-          <!--              </button>-->
-          <!--            </div>-->
-          <!--          </div>-->
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
