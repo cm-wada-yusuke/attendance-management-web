@@ -1,0 +1,142 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">ユーザー別勤怠</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button" .1
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>ユーザー別勤怠</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+
+    <div class="user-attendance-list-area">
+      <!-- search and result-->
+      <div fxLayout="column" fxLayoutAlign="space-around space-around" fxLayoutGap="5px">
+        <form [formGroup]="attendanceSearchFormGroup" class="list-item-search-form-area">
+          <!--inputs and buttons-->
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <!--search components-->
+            <div fxFlex="40">
+              <mat-form-field fxFlexFill appearance="standard">
+                <input matInput placeholder="yamada.taro" formControlName="name">
+                <mat-hint>Slackユーザー名</mat-hint>
+<!--                <button matSuffix color="basic" mat-button (click)="attendanceSearchFormGroup.valid && search()">-->
+<!--                  <mat-icon>search</mat-icon>-->
+<!--                </button>-->
+              </mat-form-field>
+            </div>
+            <div fxFlex="30">
+              <mat-form-field fxFlexFill appearance="standard">
+                <input matInput formControlName="month" [matDatepicker]="giftIssuedFrom">
+                <mat-hint>表示する月</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="giftIssuedFrom"></mat-datepicker-toggle>
+                <mat-datepicker #giftIssuedFrom></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div fxFlex="30">
+              <button mat-raised-button color="default"
+                      (click)="attendanceSearchFormGroup.valid && search()">
+                検索する
+                <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div fxFlex class="list-fat-item-result-area">
+          <div>
+            <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+          </div>
+          <!--          <div class="mat-elevation-z8">-->
+          <!--            <table fxFlexFill mat-table [dataSource]="supplierUserResult">-->
+
+          <!--              <ng-container matColumnDef="userUuid">-->
+          <!--                <th mat-header-cell *matHeaderCellDef>ユーザーID</th>-->
+          <!--                <td mat-cell *matCellDef="let element"> {{element.userUuid || '-'}}</td>-->
+          <!--              </ng-container>-->
+
+          <!--              <ng-container matColumnDef="email">-->
+          <!--                <th mat-header-cell *matHeaderCellDef>メールアドレス</th>-->
+          <!--                <td mat-cell *matCellDef="let element"> {{element.email || '-'}}</td>-->
+          <!--              </ng-container>-->
+
+          <!--              <ng-container matColumnDef="displayUserName">-->
+          <!--                <th mat-header-cell *matHeaderCellDef>氏名</th>-->
+          <!--                <td mat-cell *matCellDef="let element"> {{element.displayUserName || '-'}}</td>-->
+          <!--              </ng-container>-->
+
+          <!--              <ng-container matColumnDef="supplierId">-->
+          <!--                <th mat-header-cell *matHeaderCellDef>サプライヤID</th>-->
+          <!--                <td mat-cell *matCellDef="let element"> {{element.supplierId}}</td>-->
+          <!--              </ng-container>-->
+
+          <!--              <ng-container matColumnDef="company">-->
+          <!--                <th mat-header-cell *matHeaderCellDef>企業名</th>-->
+          <!--                <td mat-cell *matCellDef="let element"> {{element.company || '-'}}</td>-->
+          <!--              </ng-container>-->
+
+
+          <!--              <ng-container matColumnDef="createdAt">-->
+          <!--                <th mat-header-cell *matHeaderCellDef>作成日時</th>-->
+          <!--                <td mat-cell *matCellDef="let element"> {{toJst(element.createdAt) || '-'}}</td>-->
+          <!--              </ng-container>-->
+
+          <!--              <ng-container matColumnDef="updatedAt">-->
+          <!--                <th mat-header-cell *matHeaderCellDef>更新日時</th>-->
+          <!--                <td mat-cell *matCellDef="let element"> {{toJst(element.updatedAt) || '-'}}</td>-->
+          <!--              </ng-container>-->
+
+          <!--              &lt;!&ndash; Edit Column &ndash;&gt;-->
+          <!--              <ng-container matColumnDef="edit">-->
+          <!--                <th mat-header-cell *matHeaderCellDef>編集</th>-->
+          <!--                <td mat-cell *matCellDef="let element">-->
+          <!--                  <button mat-icon-button color="primary" (click)="edit(element)">-->
+          <!--                    <mat-icon color="primary">edit</mat-icon>-->
+          <!--                  </button>-->
+          <!--                </td>-->
+          <!--              </ng-container>-->
+
+          <!--              &lt;!&ndash; Delete Column &ndash;&gt;-->
+          <!--              <ng-container matColumnDef="delete">-->
+          <!--                <th mat-header-cell *matHeaderCellDef>削除</th>-->
+          <!--                <td mat-cell *matCellDef="let element">-->
+          <!--                  <button [disabled]="isManager(element)" mat-icon-button color="warn" (click)="delete(element)">-->
+          <!--                    <mat-icon [color]="isManager(element) ? 'accent' : 'warn'">delete_forever</mat-icon>-->
+          <!--                  </button>-->
+          <!--                </td>-->
+          <!--              </ng-container>-->
+
+          <!--              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+          <!--              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+          <!--            </table>-->
+          <!--            <mat-list role="list" *ngIf="serverError">-->
+          <!--              <mat-list-item role="listitem">-->
+          <!--                <mat-error>{{getServerErrorMessage()}}</mat-error>-->
+          <!--              </mat-list-item>-->
+          <!--            </mat-list>-->
+          <!--            <div *ngIf="lastEvaluatedUserKey" fxFlexFill fxLayoutAlign="center center">-->
+          <!--              <button fxFlexFill mat-button color="basic" (click)="getData(lastEvaluatedUserKey)">-->
+          <!--                <mat-icon>expand_more</mat-icon>-->
+          <!--                さらに読み込む-->
+          <!--              </button>-->
+          <!--            </div>-->
+          <!--          </div>-->
+        </div>
+      </div>
+    </div>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
