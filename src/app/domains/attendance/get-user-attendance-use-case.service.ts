@@ -11,7 +11,7 @@ export class GetUserAttendanceUseCaseService {
   }
 
   getUserAttendances(name: string, month: Moment): Promise<Attendance[]> {
-    return this.userAttendanceClient.getAttendaces(name, month);
+    return this.userAttendanceClient.getAttendances(name, month);
   }
 }
 
@@ -21,6 +21,7 @@ export interface Attendance {
   userId: string;
   name: string;
   displayName: string;
+  image48: string;
   startAt: Moment;
   endAt?: Moment;
   startAtDay: Moment;

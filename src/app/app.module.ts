@@ -15,8 +15,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
-  MatDatepickerModule,
+  MAT_DATE_LOCALE, MatCardModule,
+  MatDatepickerModule, MatDividerModule,
   MatFormFieldModule,
   MatInputModule,
   MatProgressBarModule,
@@ -49,7 +49,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatProgressBarModule,
     MatDatepickerModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatDividerModule
   ],
   providers: [
     // The locale would typically be provided on the root module of your application. We do it at

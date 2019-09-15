@@ -114,7 +114,8 @@ export class UserAttendanceComponent implements OnInit {
     return {
       displayName: users.length ? users[0].displayName || users[0].name : '-',
       month: DateTime.formatMonth(month),
-      totalWorkTime: total.toPrecision(2)
+      totalWorkTime: total.toPrecision(2),
+      avatarImage: users.length ? users[0].image48 : 'https://material.angular.io/assets/img/examples/shiba1.jpg'
     };
   }
 
@@ -159,7 +160,6 @@ export class UserAttendanceComponent implements OnInit {
     return a.endAt.diff(a.startAt, 'hours', true);
   }
 
-
 }
 
 
@@ -172,4 +172,5 @@ interface Summary {
   displayName: string;
   month: string;
   totalWorkTime: string;
+  avatarImage: string;
 }

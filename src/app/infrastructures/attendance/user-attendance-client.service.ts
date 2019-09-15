@@ -20,7 +20,7 @@ export class UserAttendanceClientService {
   ) {
   }
 
-  getAttendaces(name: string, month: Moment): Promise<Attendance[]> {
+  getAttendances(name: string, month: Moment): Promise<Attendance[]> {
     const params = new HttpParams()
       .set('name', name)
       .set('month', month.format('YYYY-MM'));
@@ -39,6 +39,7 @@ export class UserAttendanceClientService {
       userId: res.userId,
       name: res.name,
       displayName: res.displayName,
+      image48: res.image48,
       startAt: moment(res.startAt),
       endAt: res.endAt ? moment(res.endAt) : undefined,
       startAtDay: moment(res.startAtDay),
@@ -54,6 +55,7 @@ interface UserAttendanceResponse {
   userId: string;
   name: string;
   displayName: string;
+  image48: string;
   startAt: string;
   endAt?: string;
   startAtDay: string;
