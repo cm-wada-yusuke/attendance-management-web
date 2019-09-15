@@ -114,7 +114,7 @@ export class UserAttendanceComponent implements OnInit {
     return {
       displayName: users.length ? users[0].displayName || users[0].name : '-',
       month: DateTime.formatMonth(month),
-      totalWorkTime: total.toPrecision(2),
+      totalWorkTime: total.toPrecision(5),
       avatarImage: users.length ? users[0].image48 : 'https://material.angular.io/assets/img/examples/shiba1.jpg'
     };
   }
@@ -150,7 +150,7 @@ export class UserAttendanceComponent implements OnInit {
     if (!calendar.attendance || !calendar.attendance.startAt || !calendar.attendance.endAt) {
       return '-';
     }
-    return this.workTime(calendar.attendance).toPrecision(2);
+    return this.workTime(calendar.attendance).toPrecision(3);
   }
 
   workTime(a: Attendance): number {
