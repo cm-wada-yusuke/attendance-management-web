@@ -70,7 +70,9 @@ export class UserAttendanceComponent implements OnInit {
     ).then(attendances => {
       console.log('attendances', attendances);
       this.userAttendances = this.generateCalendarAttendance(attendances);
+      console.log('userAttendances', this.userAttendances);
       this.summary = this.generateSummary(attendances);
+      console.log('summary', this.summary);
       this.loading = false;
     })
       .catch(e => {
@@ -95,9 +97,6 @@ export class UserAttendanceComponent implements OnInit {
     return Array.from(new Array(days)).map((_, i) => {
       const day = DateTime.utc(month.year(), month.month(), i + 1);
       const attendance = user.filter(a => {
-        console.log('startAtDay', a.startAtDay);
-        console.log('day', day);
-        console.log('diff', a.startAtDay.diff(day));
         return a.startAtDay.diff(day) === 0;
       });
 
@@ -142,6 +141,7 @@ export class UserAttendanceComponent implements OnInit {
     if (!calendar.attendance || !calendar.attendance.endAt) {
       return '-';
     }
+    console.log('calendar.attendance.endAt', calendar.attendance.endAt);
     return DateTime.formatJstTime(calendar.attendance.endAt);
   }
 
@@ -153,6 +153,9 @@ export class UserAttendanceComponent implements OnInit {
   }
 
   workTime(a: Attendance): number {
+    if (!a.endAt) {
+      return 0;
+    }
     return a.endAt.diff(a.startAt, 'hours', true);
   }
 

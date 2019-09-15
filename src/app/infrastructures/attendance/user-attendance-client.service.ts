@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
-import { Moment } from 'moment';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import * as moment from 'moment';
+import { Moment } from 'moment';
 import { Attendance } from '../../domains/attendance/get-user-attendance-use-case.service';
-import { DateTime } from '../../modules/utils/date-time';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +40,7 @@ export class UserAttendanceClientService {
       name: res.name,
       displayName: res.displayName,
       startAt: moment(res.startAt),
-      endAt: moment(res.endAt),
+      endAt: res.endAt ? moment(res.endAt) : undefined,
       startAtDay: moment(res.startAtDay),
       startAtMonth: moment(res.startAtMonth)
     }));
@@ -56,7 +55,7 @@ interface UserAttendanceResponse {
   name: string;
   displayName: string;
   startAt: string;
-  endAt: string;
+  endAt?: string;
   startAtDay: string;
   startAtMonth: string;
 }

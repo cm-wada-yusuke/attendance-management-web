@@ -22,7 +22,7 @@ export interface Attendance {
   name: string;
   displayName: string;
   startAt: Moment;
-  endAt: Moment;
+  endAt?: Moment;
   startAtDay: Moment;
   startAtMonth: Moment;
 }
