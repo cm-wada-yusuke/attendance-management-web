@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~8.2.5",
     "@angular/platform-browser-dynamic": "~8.2.5",
     "@angular/router": "~8.2.5",
+    "@auth0/auth0-spa-js": "^1.2.4",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "rxjs": "~6.4.0",
