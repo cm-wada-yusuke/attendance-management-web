@@ -18,18 +18,22 @@ import {
   MAT_DATE_LOCALE, MatCardModule,
   MatDatepickerModule, MatDividerModule,
   MatFormFieldModule,
-  MatInputModule,
+  MatInputModule, MatMenuModule,
   MatProgressBarModule,
   MatTableModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { CallbackComponent } from './components/auth/callback/callback.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserAttendanceComponent
+    UserAttendanceComponent,
+    NavbarComponent,
+    CallbackComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     HttpClientModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMenuModule
   ],
   providers: [
     // The locale would typically be provided on the root module of your application. We do it at
