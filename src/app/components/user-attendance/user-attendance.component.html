@@ -10,15 +10,25 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>ユーザー別勤怠</span>
+      <div fxFill fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="50%">
+          <button
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawer.toggle()"
+            *ngIf="isHandset$ | async">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+          <span>ユーザー別勤怠</span>
+        </div>
+        <div fxFlex="50%">
+          <div fxLayout="row" fxLayoutAlign="end center">
+            <app-navbar *ngIf="auth.userProfile$ | async as profile" [displayUserName]="profile.name"></app-navbar>
+          </div>
+        </div>
+      </div>
+
     </mat-toolbar>
     <!-- Add Content Here -->
 
@@ -64,6 +74,11 @@
             <mat-card-title> {{summary.totalWorkTime}}時間</mat-card-title>
             <mat-card-subtitle>{{summary.displayName}}さんの{{summary.month}} 合計労働時間</mat-card-subtitle>
           </mat-card-header>
+          <mat-card-content>
+            <pre *ngIf="auth.userProfile$ | async as profile">
+              <code>{{ profile | json }}</code>
+            </pre>
+          </mat-card-content>
         </mat-card>
         <mat-divider></mat-divider>
         <div>

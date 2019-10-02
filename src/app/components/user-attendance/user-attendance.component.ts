@@ -7,6 +7,7 @@ import { DateTime } from '../../modules/utils/date-time';
 import { Moment } from 'moment';
 import { MAT_DATE_FORMATS, MatDatepicker } from '@angular/material';
 import { Attendance, GetUserAttendanceUseCaseService } from '../../domains/attendance/get-user-attendance-use-case.service';
+import { Auth0ClientService } from '../../domains/auth/auth0-client.service';
 
 @Component({
   selector: 'app-user-attendance',
@@ -44,7 +45,8 @@ export class UserAttendanceComponent implements OnInit {
   summary: Summary;
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private useCase: GetUserAttendanceUseCaseService
+              private useCase: GetUserAttendanceUseCaseService,
+              public auth: Auth0ClientService
   ) {
   }
 
